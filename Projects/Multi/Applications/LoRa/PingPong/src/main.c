@@ -88,7 +88,7 @@ Maintainer: Miguel Luis and Gregory Cristian
                                                               //  1: 250 kHz,
                                                               //  2: 500 kHz,
                                                               //  3: Reserved]
-#define LORA_SPREADING_FACTOR                       12        // [SF7..SF12]
+#define LORA_SPREADING_FACTOR                       9         // [SF7..SF12]
 #define LORA_CODINGRATE                             4         // [1: 4/5,
                                                               //  2: 4/6,
                                                               //  3: 4/7,
@@ -386,6 +386,7 @@ void OnTxDone( void )
     Radio.Sleep( );
     State = TX;
     PRINTF("OnTxDone\n\r");
+    PRINTF("Ross was here\n\r");
 }
 
 void OnRxDone( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr )
