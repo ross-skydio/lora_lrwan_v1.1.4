@@ -80,7 +80,7 @@ Maintainer: Miguel Luis and Gregory Cristian
     #error "Please define a frequency band in the compiler options."
 #endif
 
-#define TX_OUTPUT_POWER                             14        // dBm
+#define TX_OUTPUT_POWER                             20        // dBm
 
 #if defined( USE_MODEM_LORA )
 
@@ -88,8 +88,8 @@ Maintainer: Miguel Luis and Gregory Cristian
                                                               //  1: 250 kHz,
                                                               //  2: 500 kHz,
                                                               //  3: Reserved]
-#define LORA_SPREADING_FACTOR                       7         // [SF7..SF12]
-#define LORA_CODINGRATE                             1         // [1: 4/5,
+#define LORA_SPREADING_FACTOR                       12        // [SF7..SF12]
+#define LORA_CODINGRATE                             4         // [1: 4/5,
                                                               //  2: 4/6,
                                                               //  3: 4/7,
                                                               //  4: 4/8]
@@ -277,18 +277,18 @@ int main( void )
 
             DelayMs( 1 ); 
             Radio.Send( Buffer, BufferSize );
-            }
-            else if( strncmp( ( const char* )Buffer, ( const char* )PingMsg, 4 ) == 0 )
-            { // A master already exists then become a slave
-              isMaster = false;
-              //GpioWrite( &Led2, 1 ); // Set LED off
-              Radio.Rx( RX_TIMEOUT_VALUE );
-            }
-            else // valid reception but neither a PING or a PONG message
-            {    // Set device as master ans start again
-              isMaster = true;
-              Radio.Rx( RX_TIMEOUT_VALUE );
-            }
+          }
+			else if( strncmp( ( const char* )Buffer, ( const char* )PingMsg, 4 ) == 0 )
+			{ // A master already exists then become a slave
+			  isMaster = false;
+			  //GpioWrite( &Led2, 1 ); // Set LED off
+			  Radio.Rx( RX_TIMEOUT_VALUE );
+			}
+			else // valid reception but neither a PING or a PONG message
+			{    // Set device as master ans start again
+			  isMaster = true;
+			  Radio.Rx( RX_TIMEOUT_VALUE );
+			}
           }
         }
         else
